@@ -18,7 +18,7 @@ func c() []uintptr {
 func b() []uintptr { return c() }
 func a() []uintptr { return b() }
 
-func TestDefaultErrorStackMarshaler(t *testing.T) {
+func TestExtractFrames(t *testing.T) {
 	t.Parallel()
 
 	t.Run("single call", func(t *testing.T) {
@@ -28,7 +28,7 @@ func TestDefaultErrorStackMarshaler(t *testing.T) {
 
 		require.Equal(t, []string{
 			"stacktrace/utils_test.go:14#c",
-			"stacktrace/utils_test.go:27#TestDefaultErrorStackMarshaler.func1",
+			"stacktrace/utils_test.go:27#TestExtractFrames.func1",
 		}, callersFrames)
 	})
 
@@ -41,7 +41,7 @@ func TestDefaultErrorStackMarshaler(t *testing.T) {
 			"stacktrace/utils_test.go:14#c",
 			"stacktrace/utils_test.go:18#b",
 			"stacktrace/utils_test.go:19#a",
-			"stacktrace/utils_test.go:38#TestDefaultErrorStackMarshaler.func2",
+			"stacktrace/utils_test.go:38#TestExtractFrames.func2",
 		}, callersFrames)
 	})
 
